@@ -2,11 +2,11 @@ from cryptography.fernet import Fernet
 
 class SecureChannel:
     def __init__(self):
-        self.key = Fernet.generate_key()
-        self.cipher = Fernet(self.key)
+        self.encryption_key = Fernet.generate_key()
+        self.fernet_cipher = Fernet(self.encryption_key)
 
-    def encrypt(self, msg: bytes) -> bytes:
-        return self.cipher.encrypt(msg)
+    def encrypt(self, plaintext: bytes) -> bytes:
+        return self.fernet_cipher.encrypt(plaintext)
 
-    def decrypt(self, token: bytes) -> bytes:
-        return self.cipher.decrypt(token)
+    def decrypt(self, encrypted_token: bytes) -> bytes:
+        return self.fernet_cipher.decrypt(encrypted_token)

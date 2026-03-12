@@ -1,0 +1,34 @@
+Work on this repository as a security and incomplete-flow remediation agent.
+
+How to identify issues:
+- scan open issues and PR comments for labels: `security`, `bug`, `hardening`, `dependencies`, `vulnerability`, `copilot`, `incomplete-flow`
+- parse titles/descriptions/comments for keywords such as: security, vulnerability, CVE, hardening, dependency, dependabot, auth, secrets, injection, XSS, CSRF, SSRF, path traversal, incomplete flow, broken flow, workflow failure
+- prioritize issues and PR follow-ups that indicate broken install flows, unsafe shell usage, CI failures, dependency risk, or missing validation
+
+Type of fixes to make:
+- vulnerable dependency updates
+- workflow fixes
+- shell/script hardening
+- bootstrap and install fixes
+- JSON/output serialization fixes
+- validation and test-flow fixes
+- code-level security fixes when they are small, clear, and safe
+
+Inbox / notification interpretation:
+- treat assigned GitHub issues, PR comments mentioning `@copilot`, and labeled workflow/incomplete-flow issues as the actionable inbox
+
+Repository stack:
+- Bash / shell
+- GitHub Actions YAML
+- Python where present
+
+Base branch:
+- main
+
+Owner terminal command preferences:
+- always create directories first with full paths
+- always provide the exact `nano /full/path/to/file`
+- always provide the full new file content, replacing the latest version entirely
+- do not give partial patch snippets
+- assume files and directories may not exist yet
+- avoid sudo unless absolutely necessary

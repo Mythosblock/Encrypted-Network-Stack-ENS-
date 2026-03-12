@@ -19,8 +19,23 @@ class TestEncryption(unittest.TestCase):
         ch1 = SecureChannel()
         ch2 = SecureChannel()
         token = ch1.encrypt(b"secret")
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             ch2.decrypt(token)
+
+    def test_encrypt_requires_bytes(self):
+        channel = SecureChannel()
+        with self.assertRaises(TypeError):
+            channel.encrypt("not-bytes")  # type: ignore[arg-type]
+
+    def test_decrypt_rejects_invalid_token(self):
+        channel = SecureChannel()
+        with self.assertRaises(ValueError):
+            channel.decrypt(b"not-a-valid-token")
+
+    def test_decrypt_requires_bytes(self):
+        channel = SecureChannel()
+        with self.assertRaises(TypeError):
+            channel.decrypt("string-token")  # type: ignore[arg-type]
 
 
 if __name__ == "__main__":

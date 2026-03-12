@@ -1,0 +1,4 @@
+# Protect rulesets and workflow configuration from unreviewed changes
+/.github/CODEOWNERS @Mythosblock
+/.github/rulesets/** @Mythosblock
+/.github/workflows/** @Mythosblock

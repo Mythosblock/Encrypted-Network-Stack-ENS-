@@ -13,6 +13,14 @@ class TestNetworking(unittest.TestCase):
         self.assertEqual(sock.host, '0.0.0.0')
         self.assertEqual(sock.port, 9000)
 
+    def test_socket_invalid_host_raises(self):
+        with self.assertRaises(ValueError):
+            SecureSocket(host='', port=8000)
+
+    def test_socket_invalid_port_raises(self):
+        with self.assertRaises(ValueError):
+            SecureSocket(host='127.0.0.1', port=70000)
+
 
 if __name__ == "__main__":
     unittest.main()

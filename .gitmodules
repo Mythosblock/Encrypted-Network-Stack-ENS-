@@ -1,0 +1,3 @@
+[submodule "tools/mac-sentinel-audit"]
+	path = tools/mac-sentinel-audit
+	url = https://github.com/Quantum-Cipher/mac-sentinel-audit.git

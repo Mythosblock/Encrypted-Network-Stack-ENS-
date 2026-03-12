@@ -7,15 +7,18 @@ class NetworkNode:
         self.socket = SecureSocket()
         self.channel = SecureChannel()
 
+    def _log(self, message: str):
+        print(f"[{self.node_id}] {message}")
+
     def start(self):
-        print(f"[{self.node_id}] Node started")
+        self._log("Node started")
 
     def send_message(self, msg: bytes):
         token = self.channel.encrypt(msg)
-        print(f"[{self.node_id}] Sending encrypted: {token}")
+        self._log(f"Sending encrypted: {token}")
         return token
 
     def receive_message(self, token: bytes):
         msg = self.channel.decrypt(token)
-        print(f"[{self.node_id}] Received decrypted: {msg}")
+        self._log(f"Received decrypted: {msg}")
         return msg

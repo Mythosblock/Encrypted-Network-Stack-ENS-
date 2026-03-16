@@ -1,5 +1,10 @@
+import logging
+
 from src.networking import SecureSocket
 from src.encryption import SecureChannel
+
+logger = logging.getLogger(__name__)
+
 
 class NetworkNode:
     def __init__(self, node_id="NODE"):
@@ -8,14 +13,14 @@ class NetworkNode:
         self.channel = SecureChannel()
 
     def start(self):
-        print(f"[{self.node_id}] Node started")
+        logger.info("[%s] Node started", self.node_id)
 
     def send_message(self, msg: bytes):
         token = self.channel.encrypt(msg)
-        print(f"[{self.node_id}] Sending encrypted: {token}")
+        logger.debug("[%s] Sending encrypted: %s", self.node_id, token)
         return token
 
     def receive_message(self, token: bytes):
         msg = self.channel.decrypt(token)
-        print(f"[{self.node_id}] Received decrypted: {msg}")
+        logger.debug("[%s] Received decrypted: %s", self.node_id, msg)
         return msg

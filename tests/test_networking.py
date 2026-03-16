@@ -13,6 +13,11 @@ class TestNetworking(unittest.TestCase):
         self.assertEqual(sock.host, '0.0.0.0')
         self.assertEqual(sock.port, 9000)
 
+    # --- Lazy socket init ---
+    def test_sock_initially_none(self):
+        sock = SecureSocket()
+        self.assertIsNone(sock._sock)
+
     # --- Host validation ---
     def test_empty_host_raises_value_error(self):
         with self.assertRaises(ValueError):

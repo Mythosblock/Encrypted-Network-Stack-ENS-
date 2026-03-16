@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class SecureSocket:
     def __init__(self, host='127.0.0.1', port=8000):
         if not isinstance(host, str) or not host:
@@ -6,6 +11,7 @@ class SecureSocket:
             raise ValueError("port must be an integer in the range 1-65535")
         self.host = host
         self.port = port
+        self._sock = None
 
     def connect(self):
-        print(f"Connecting to {self.host}:{self.port}")
+        logger.info("Connecting to %s:%s", self.host, self.port)

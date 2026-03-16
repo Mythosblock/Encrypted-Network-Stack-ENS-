@@ -87,6 +87,40 @@ class TestEncryption(unittest.TestCase):
             with self.assertRaises(ValueError):
                 channel.decrypt(token)
 
+    # --- Batch operations ---
+    def test_encrypt_batch_returns_list_of_tokens(self):
+        channel = SecureChannel()
+        msgs = [b"msg1", b"msg2", b"msg3"]
+        tokens = channel.encrypt_batch(msgs)
+        self.assertEqual(len(tokens), len(msgs))
+        for token in tokens:
+            self.assertIsInstance(token, bytes)
+
+    def test_decrypt_batch_round_trips(self):
+        channel = SecureChannel()
+        msgs = [b"alpha", b"beta", b"gamma"]
+        tokens = channel.encrypt_batch(msgs)
+        decrypted = channel.decrypt_batch(tokens)
+        self.assertEqual(decrypted, msgs)
+
+    def test_encrypt_batch_empty(self):
+        channel = SecureChannel()
+        self.assertEqual(channel.encrypt_batch([]), [])
+
+    def test_decrypt_batch_empty(self):
+        channel = SecureChannel()
+        self.assertEqual(channel.decrypt_batch([]), [])
+
+    def test_encrypt_batch_type_error_propagates(self):
+        channel = SecureChannel()
+        with self.assertRaises(TypeError):
+            channel.encrypt_batch([b"ok", "not bytes"])
+
+    def test_decrypt_batch_invalid_token_propagates(self):
+        channel = SecureChannel()
+        with self.assertRaises(ValueError):
+            channel.decrypt_batch([b"bad-token"])
+
 
 if __name__ == "__main__":
     unittest.main()

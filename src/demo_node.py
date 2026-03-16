@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.node import NetworkNode
+from src.node import NetworkNode  # noqa: E402
 
 node = NetworkNode("DEMO_NODE")
 node.start()

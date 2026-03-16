@@ -1,6 +1,7 @@
 from src.networking import SecureSocket
 from src.encryption import SecureChannel
 
+
 class NetworkNode:
     def __init__(self, node_id="NODE"):
         self.node_id = node_id

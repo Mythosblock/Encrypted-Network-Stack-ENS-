@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 Work on this repository as a security and incomplete-flow remediation agent.
 
 How to identify issues:
